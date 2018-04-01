@@ -1,4 +1,5 @@
 import copy
+import json
 
 import collections
 from django import forms
@@ -9,11 +10,12 @@ from django.template.loader import render_to_string
 class JSONEditorWidget(forms.Widget):
     template_name = 'django_admin_json_editor/editor.html'
 
-    def __init__(self, schema, collapsed=True, sceditor=False):
+    def __init__(self, schema, collapsed=True, sceditor=False, editor_options={}):
         super(JSONEditorWidget, self).__init__()
         self._schema = schema
         self._collapsed = collapsed
         self._sceditor = sceditor
+        self._editor_options = editor_options
 
     def render(self, name, value, attrs=None, renderer=None):
         if callable(self._schema):
@@ -31,7 +33,9 @@ class JSONEditorWidget(forms.Widget):
             'schema': schema,
             'data': value,
             'sceditor': int(self._sceditor),
+            'editor_options': json.dumps(self._editor_options)
         }
+
         return mark_safe(render_to_string(self.template_name, context))
 
     @classmethod
