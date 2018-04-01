@@ -14,12 +14,11 @@
     {{ name }}_editor.on('change', function () {
         var errors = {{ name }}_editor.validate();
         if (errors.length) {
-            console.log(errors);
+            // TODO
         }
-        else {
-            var json = {{ name }}_editor.getValue();
-            document.getElementById("id_{{ name }}").value = JSON.stringify(json);
-        }
+
+        var json = {{ name }}_editor.getValue();
+        document.getElementById("id_{{ name }}").value = JSON.stringify(json);
     });
     {% if data %}
         var json = {{ data|safe }};

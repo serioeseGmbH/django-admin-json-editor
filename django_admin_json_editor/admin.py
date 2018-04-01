@@ -25,7 +25,6 @@ class JSONEditorWidget(forms.Widget):
 
         self.schema_updater(schema)
 
-        schema['title'] = ' '
         schema['options'] = {'collapsed': int(self._collapsed)}
 
         context = {
