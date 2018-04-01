@@ -30,7 +30,7 @@ class JSONEditorWidget(forms.Widget):
 
         context = {
             'name': name,
-            'schema': schema,
+            'schema': json.dumps(schema),
             'data': value,
             'sceditor': int(self._sceditor),
             'editor_options': json.dumps(self._editor_options)
